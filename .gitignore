@@ -1,0 +1,5 @@
+**/node_modules
+scripts/.canvas-access-token
+scripts/.my-key
+scripts/.my-secret
+client/.env.production*

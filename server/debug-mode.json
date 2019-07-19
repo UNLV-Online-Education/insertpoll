@@ -1,0 +1,14 @@
+{
+  "apps" : [{
+    "name"        : "node-lti",
+    "script"      : "/var/www/html/node-lti/index.js",
+    "watch"       : false,
+    "env": {
+      "DEBUG": "true"
+
+    },
+    "env_production" : {
+       "DEBUG": "false"
+    }
+  }]
+}
