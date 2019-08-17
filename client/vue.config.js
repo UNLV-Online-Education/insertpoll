@@ -1,5 +1,3 @@
 module.exports = {
-    baseUrl: process.env.NODE_ENV === 'production'
-      ? '/insertpoll/'
-      : '/'
-  }
+  baseUrl: process.env.BASE_URL ? process.env.BASE_URL : '/'
+}
