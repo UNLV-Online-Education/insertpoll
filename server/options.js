@@ -10,7 +10,6 @@ if (debugModeOn) {
 
 var parsed = JSON.parse(fs.readFileSync(configPath, 'UTF-8'));
 
-exports.ltiUrl = parsed.ltiUrl;
 exports.key = parsed.lti_key;
 exports.secret = parsed.lti_secret;
 exports.jwtSecret = parsed.jwt_secret;

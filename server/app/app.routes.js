@@ -21,6 +21,7 @@ module.exports = function (express) {
 
     // Protect API routes behind JWT verification.
     api.use(token.verify);
+
     api.get('/polls/:poll_id', polls.getOne);
     api.post('/polls', polls.create);
     api.post('/polls/:poll_id/responses', polls.saveResponse);

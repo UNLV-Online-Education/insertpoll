@@ -1,12 +1,12 @@
 {
-  "ltiUrl": "https://yourdomain.edu/api/get/",
   "base_path": "/path-to-your-app/",
   "lti_key": "the consumer key",
   "lti_secret": "shared lti secret",
   "jwt_secret": "some long random digits",
-  "db_schema": "mysql db name",
+  "db_host": "database host",
   "db_user": "mysql user",
   "db_password": "password",
+  "db_schema": "mysql db name",
   "db_dialect": "mysql",
-  "db_host": "database host"
+  "debugMode": false
 }
