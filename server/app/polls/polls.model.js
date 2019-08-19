@@ -5,7 +5,6 @@ var DataTypes = require('sequelize/lib/data-types');
 var sequelize = new Sequelize(options.db_schema, options.db_user, options.db_password, {
     host: options.db_host,
     dialect: options.db_dialect,
-    operatorsAliases: false,
     pool: {
         max: 5,
         min: 0,
