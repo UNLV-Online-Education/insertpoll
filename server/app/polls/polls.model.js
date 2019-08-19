@@ -1,14 +1,14 @@
-var options = require('../../options')
+var dbConfig = require('config').get('db')
 var Sequelize = require('sequelize')
 var DataTypes = require('sequelize/lib/data-types')
 
 var sequelize = new Sequelize(
-  options.db_schema,
-  options.db_user,
-  options.db_password,
+  dbConfig.schema,
+  dbConfig.user,
+  dbConfig.password,
   {
-    host: options.db_host,
-    dialect: options.db_dialect,
+    host: dbConfig.host,
+    dialect: dbConfig.dialect,
     pool: {
       max: 5,
       min: 0,
@@ -91,7 +91,7 @@ responses.belongsTo(polls, {
   as: 'poll'
 })
 module.exports = {
-  polls,
-  responses,
+  polls: polls,
+  responses: responses,
   sequelize: sequelize
 }

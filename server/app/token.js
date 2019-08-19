@@ -1,13 +1,12 @@
 var jwt = require('jsonwebtoken')
-var options = require('../options')
-
+var appConfig = require('config').get('app')
 module.exports = function() {
   return {
     verify: function(req, res, next) {
       ;(function(authToken) {
         console.log(authToken)
         if (authToken) {
-          jwt.verify(authToken, options.jwtSecret, function(err, decoded) {
+          jwt.verify(authToken, appConfig.jwtSecret, function(err, decoded) {
             if (err) {
               console.log(new Date(), '--- auth token invalid, no access.')
               return res.json({

@@ -4,10 +4,7 @@ var cors = require('cors')
 var app = express()
 var bodyParser = require('body-parser')
 var path = require('path')
-var options = require('./options')
-
-console.log('options')
-console.log(options)
+var debug = require('config').get('debug')
 
 app.use(bodyParser.json()) // for parsing application/json
 app.use(
@@ -15,7 +12,7 @@ app.use(
     extended: true
   })
 ) // for parsing application/x-www-form-urlencoded
-if (options.debugModeOn) {
+if (debug) {
   app.use(logger)
 }
 app.use(express.static(path.join(__dirname, 'public')))
@@ -24,8 +21,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 // all of our routes will be prefixed with /api
 
 var router = express.Router()
-if (options.debugModeOn) {
-  console.log('Using CORS, debug mode...')
+if (debug) {
+  console.log(require('config'))
+  console.log('Using CORS')
   router.use(cors())
 }
 

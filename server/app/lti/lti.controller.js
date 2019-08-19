@@ -1,12 +1,11 @@
 var lti = require('ims-lti')
 var fs = require('fs')
 var jwt = require('jsonwebtoken')
-var options = require('../../options')
+var ltiConfig = require('config').get('lti')
+var appConfig = require('config').get('app')
 
 var verboseModeOn = process.env.VERBOSE || false
 var oneTimeHash = new Map()
-var consumer_key = options.key
-var shared_secret = options.secret
 
 module.exports = {
   getLTIPayload: function(req, res) {
@@ -24,8 +23,8 @@ module.exports = {
     }
   },
   launch: function(req, res) {
-    req.originalUrl = options.base_path + 'api/launch'
-    provider = new lti.Provider(consumer_key, shared_secret)
+    req.originalUrl = appConfig.basePath + 'api/launch'
+    provider = new lti.Provider(ltiConfig.key, ltiConfig.secret)
     if (verboseModeOn) {
       console.log(req.body)
     }
@@ -51,13 +50,13 @@ function launchLTIApp(req, res) {
   var redirectUrl
   if (typeof req.body.pollId !== 'undefined') {
     redirectUrl =
-      options.base_path +
+      appConfig.basePath +
       'embed?hash=' +
       hashForRecord +
       '&pollId=' +
       req.body.pollId
   } else {
-    redirectUrl = options.base_path + 'insert?hash=' + hashForRecord
+    redirectUrl = appConfig.basePath + 'insert?hash=' + hashForRecord
   }
 
   console.log('redirecting: ' + redirectUrl)
@@ -97,7 +96,7 @@ function parseAndSaveDataObject(ltiData) {
 }
 
 function makeToken(tokenData) {
-  var token = jwt.sign(tokenData, options.jwtSecret, {
+  var token = jwt.sign(tokenData, appConfig.jwtSecret, {
     expiresIn: 30 * 60
   })
   return token

@@ -1,0 +1,18 @@
+{
+  "app": {
+    "basePath": "/path-to-your-app/",
+    "jwtSecret": "the consumer key"
+  },
+  "lti": {
+    "key": "shared lti secret",
+    "secret": "some long random digits"
+  },
+  "db": {
+    "host": "127.0.0.1",
+    "user": "database user",
+    "password": "password",
+    "schema": "database schema name",
+    "dialect": "dialect"
+  },
+  "debug": false
+}

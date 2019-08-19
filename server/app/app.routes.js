@@ -1,6 +1,6 @@
 var oeLTI = require('./lti/lti.controller')
 var polls = require('./polls/polls.controller')
-var options = require('../options')
+var debug = require('config').get('debug')
 
 module.exports = function(express) {
   var token = require('./token')()
@@ -15,7 +15,7 @@ module.exports = function(express) {
   api.get('/get/:hash', oeLTI.getLTIPayload)
   api.post('/launch', oeLTI.launch)
 
-  if (options.debugModeOn) {
+  if (debug) {
     api.get('/launch', oeLTI.fakeLaunch)
   }
 
