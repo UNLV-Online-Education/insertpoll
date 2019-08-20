@@ -27,4 +27,4 @@ fi
     --header "Authorization: Bearer ${TOKEN}" \
     --header 'Content-Type: application/json' \
     --header 'cache-control: no-cache' \
-    --data '{"name": "Insert Poll","consumer_key": "'${KEY}'","shared_secret": "'${SECRET}'","text": "Insert Poll","url": "'${TOOL_URL}'/api/launch","privacy_level": "public","editor_button": {"url": "'${TOOL_URL}'/insertpoll/api/launch","enabled": true,"icon_url": "https://cdn2.iconfinder.com/data/icons/gnomeicontheme/16x16/stock/object/stock_3d-light-off.png"},"custom_fields": {	"activity_url": "'${TOOL_URL}'/insertpoll/"} }'
+    --data '{"name": "Insert Poll","consumer_key": "'${KEY}'","shared_secret": "'${SECRET}'","text": "Insert Poll","url": "'${TOOL_URL}'api/launch","privacy_level": "public","editor_button": {"url": "'${TOOL_URL}'api/launch","enabled": true,"icon_url": "https://cdn2.iconfinder.com/data/icons/gnomeicontheme/16x16/stock/object/stock_3d-light-off.png"},"custom_fields": {	"activity_url": "'${TOOL_URL}'"} }'
