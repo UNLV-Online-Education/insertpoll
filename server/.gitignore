@@ -1,4 +1,3 @@
 node_modules
-development.json
-production.json
+config/local-*.json
 public

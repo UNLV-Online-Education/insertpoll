@@ -4,11 +4,11 @@ The server handles is the LTI Provider, provides the API for the client pages, a
 
 ## Configuration
 
-Create a config file called `config.json` based off of the one in `example.config.json` file. Fill in values for your own environment.
+Create a config file called `config/production.json` based on the `config/example.production.json` file. Fill in values for your own environment. You can also create another config for `config/development.json` for development, etc. If you have a value in your `NODE_ENV` environment variable, the corresponding file will be used. If there is no value in `NODE_ENV`, then `config/development.json` will be used.
 
 | Variable Name | Description                                                                                                                                                                            |
 | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| basPath       | path to the server. If it is being served on the root of the domain use `/`. If server is located in a subpath (e.g. `https://example.com/insertpoll/`) then enter `/insertpoll`       |
+| basePath      | path to the server. If it is being served on the root of the domain use `/`. If server is located in a subpath (e.g. `https://example.com/insertpoll/`) then enter `/insertpoll`       |
 | key           | Shared LTI Key used for Canvas to authenticate with the server.                                                                                                                        |
 | secret        | Shared Secret used to sign launch requests from Canvas to this server.                                                                                                                 |
 | jwtSecret     | Separate secret used to sign / verify JWT tokens between the client and the server. Use any long string of unguessable letters and numbers. _Should be different from the LTI Secret._ |

@@ -3,8 +3,8 @@ var fs = require('fs')
 var jwt = require('jsonwebtoken')
 var ltiConfig = require('config').get('lti')
 var appConfig = require('config').get('app')
+var developerOptions = require('config').get('developerOptions')
 
-var verboseModeOn = process.env.VERBOSE || false
 var oneTimeHash = new Map()
 
 module.exports = {
@@ -25,22 +25,28 @@ module.exports = {
   launch: function(req, res) {
     req.originalUrl = appConfig.basePath + 'api/launch'
     provider = new lti.Provider(ltiConfig.key, ltiConfig.secret)
-    if (verboseModeOn) {
+
+    if (developerOptions.get('outputLaunchRequests')) {
+      console.log(req.headers)
       console.log(req.body)
     }
-    provider.valid_request(req, function(err, isValid) {
-      if (isValid) {
-        launchLTIApp(req, res)
-      } else {
-        err.timestamp = new Date().toString()
-        console.log(err)
-        res.json(err)
-        res.end()
-      }
-    })
+    if (developerOptions.get('skipLTIVerification')) {
+      launchLTIApp(req, res)
+    } else {
+      provider.valid_request(req, function(err, isValid) {
+        if (isValid) {
+          launchLTIApp(req, res)
+        } else {
+          err.timestamp = new Date().toString()
+          console.log(err)
+          res.json(err)
+          res.end()
+        }
+      })
+    }
   },
   fakeLaunch: function(req, res) {
-    launchWithSampleData(req, res)
+    launchWithCannedData(req, res)
   }
 }
 
@@ -59,7 +65,7 @@ function launchLTIApp(req, res) {
     redirectUrl = appConfig.basePath + 'insert?hash=' + hashForRecord
   }
 
-  console.log('redirecting: ' + redirectUrl)
+  console.log('Redirecting: ' + redirectUrl)
   // Redirect to new Url
   res.writeHead(301, {
     Location: redirectUrl
@@ -67,8 +73,10 @@ function launchLTIApp(req, res) {
   res.end()
 }
 
-function launchWithSampleData(req, res) {
-  var sampleData = JSON.parse(fs.readFileSync('./sampleResponse.json', 'UTF-8'))
+function launchWithCannedData(req, res) {
+  var sampleData = JSON.parse(
+    fs.readFileSync('./cannedLTIPayload.json', 'UTF-8')
+  )
   req.body = sampleData
   if (typeof req.query.pollId !== 'undefined') {
     console.log('Using pollId: ' + req.query.pollId)

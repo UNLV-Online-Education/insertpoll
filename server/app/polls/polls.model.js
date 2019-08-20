@@ -1,6 +1,6 @@
-var dbConfig = require('config').get('db')
 var Sequelize = require('sequelize')
 var DataTypes = require('sequelize/lib/data-types')
+var dbConfig = require('config').get('db')
 
 var sequelize = new Sequelize(
   dbConfig.schema,

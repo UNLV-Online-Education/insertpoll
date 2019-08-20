@@ -4,7 +4,7 @@ var cors = require('cors')
 var app = express()
 var bodyParser = require('body-parser')
 var path = require('path')
-var debug = require('config').get('debug')
+var appConfig = require('config').get('app')
 
 app.use(bodyParser.json()) // for parsing application/json
 app.use(
@@ -12,18 +12,15 @@ app.use(
     extended: true
   })
 ) // for parsing application/x-www-form-urlencoded
-if (debug) {
-  app.use(logger)
-}
+app.use(logger)
 app.use(express.static(path.join(__dirname, 'public')))
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 
 var router = express.Router()
-if (debug) {
-  console.log(require('config'))
-  console.log('Using CORS')
+if (appConfig.enableCORS) {
+  console.log('CORS enabled.')
   router.use(cors())
 }
 

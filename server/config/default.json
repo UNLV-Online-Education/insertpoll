@@ -1,0 +1,24 @@
+{
+  "app": {
+    "basePath": "/path-to-your-app",
+    "jwtSecret": "secret to sign/verify jwt tokens"
+  },
+  "lti": {
+    "key": "LTI key shared with Canvas",
+    "secret": "LTI secret shared with Canvas"
+  },
+  "db": {
+    "host": "127.0.0.1",
+    "user": "database user",
+    "password": "password",
+    "schema": "database schema name",
+    "dialect": "dialect"
+  },
+  "developerOptions": {
+    "enableCORS": false,
+    "enableCannedLTI": false,
+    "skipLTIVerification": false,
+    "skipJWTVerification": false,
+    "outputLaunchRequests": false
+  }
+}
