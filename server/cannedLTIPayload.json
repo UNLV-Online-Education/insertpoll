@@ -4,5 +4,5 @@
   "custom_canvas_user_id": "235",
   "lis_person_name_full": "Bob Ross",
   "ext_content_return_url": "http://localhost:3000",
-  "roles": "Instructor"
+  "roles": "Instructor,Administrator,TA"
 }

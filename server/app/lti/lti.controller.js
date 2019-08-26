@@ -1,36 +1,23 @@
 var lti = require('ims-lti')
 var fs = require('fs')
 var jwt = require('jsonwebtoken')
-var ltiConfig = require('config').get('lti')
-var appConfig = require('config').get('app')
-var developerOptions = require('config').get('developerOptions')
-
+var config = require('config')
+var ltiConfig = config.get('lti')
+var appConfig = config.get('app')
+var developerOptions = config.get('developerOptions')
 var oneTimeHash = new Map()
 
 module.exports = {
-  getLTIPayload: function(req, res) {
-    var hash = req.params.hash
-    console.log('looking up hash: ' + hash)
-    var result = getObject(hash)
-    if (!result) {
-      res.json({
-        message: 'Could not find hash ' + hash,
-        timestamp: new Date().toString()
-      })
-      res.end()
-    } else {
-      res.json(result)
-    }
-  },
   launch: function(req, res) {
     req.originalUrl = appConfig.basePath + 'api/launch'
     provider = new lti.Provider(ltiConfig.key, ltiConfig.secret)
 
-    if (developerOptions.get('outputLaunchRequests')) {
-      console.log(req.headers)
-      console.log(req.body)
+    if (developerOptions.get('debugMode')) {
+      console.log(new Date(), 'Headers', req.headers)
+      console.log(new Date(), 'Body', req.body)
     }
     if (developerOptions.get('skipLTIVerification')) {
+      console.log(new Date(), 'Skipped LTI Verification')
       launchLTIApp(req, res)
     } else {
       provider.valid_request(req, function(err, isValid) {
@@ -45,8 +32,33 @@ module.exports = {
       })
     }
   },
+
   fakeLaunch: function(req, res) {
+    console.log('Launching with Canned LTI Data.')
     launchWithCannedData(req, res)
+  },
+
+  getLTIPayload: function(req, res) {
+    var hash = req.params.hash
+    if (developerOptions.get('debugMode')) {
+      console.log(new Date(), 'Looking up LTI Information.', hash)
+    }
+    var result = getObject(hash)
+    if (!result) {
+      res.json({
+        message: 'Could not find LTI Payload. ' + hash,
+        timestamp: new Date().toString()
+      })
+      if (developerOptions.get('debugMode')) {
+        console.log(new Date(), 'LTI Payload not found.', hash)
+      }
+      res.end()
+    } else {
+      if (developerOptions.get('debugMode')) {
+        console.log(new Date(), 'LTI Result: ', result)
+      }
+      res.json(result)
+    }
   }
 }
 
@@ -64,8 +76,9 @@ function launchLTIApp(req, res) {
   } else {
     redirectUrl = appConfig.basePath + 'insert?hash=' + hashForRecord
   }
-
-  console.log('Redirecting: ' + redirectUrl)
+  if (developerOptions.get('debugMode')) {
+    console.log('Redirecting: ' + redirectUrl)
+  }
   // Redirect to new Url
   res.writeHead(301, {
     Location: redirectUrl
@@ -79,7 +92,9 @@ function launchWithCannedData(req, res) {
   )
   req.body = sampleData
   if (typeof req.query.pollId !== 'undefined') {
-    console.log('Using pollId: ' + req.query.pollId)
+    if (developerOptions.get('debugMode')) {
+      console.log('Using pollId: ' + req.query.pollId)
+    }
     req.body.pollId = req.query.pollId
   }
   launchLTIApp(req, res)
@@ -118,8 +133,10 @@ function saveObjectWithToken(publicData, tokenData) {
     .update(JSON.stringify(publicData))
     .digest('hex')
   oneTimeHash.set(hash, publicData)
-  console.log('Launch. saved hash: ' + hash)
-  console.log(new Date(), tokenData)
+  if (developerOptions.get('debugMode')) {
+    console.log('Launch. saved hash: ' + hash)
+    console.log(new Date(), tokenData)
+  }
   return hash
 }
 

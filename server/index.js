@@ -4,7 +4,12 @@ var cors = require('cors')
 var app = express()
 var bodyParser = require('body-parser')
 var path = require('path')
-var appConfig = require('config').get('app')
+var config = require('config')
+var developerOptions = config.get('developerOptions')
+
+if (developerOptions.get('debugMode')) {
+  console.log(config)
+}
 
 app.use(bodyParser.json()) // for parsing application/json
 app.use(
@@ -19,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 // all of our routes will be prefixed with /api
 
 var router = express.Router()
-if (appConfig.enableCORS) {
+if (developerOptions.enableCORS) {
   console.log('CORS enabled.')
   router.use(cors())
 }
@@ -43,12 +48,11 @@ console.log('listening on port ' + port)
 app.listen(port)
 
 function logger(req, res, next) {
-  console.log(new Date(), req.method, req.url)
-  if (req.method == 'POST') {
-    console.log(req.body)
-  }
-  if (req.method == 'GET') {
-    console.log(req.query)
-  }
+  console.log(
+    new Date(),
+    req.method,
+    req.url,
+    req.method == 'POST' ? req.body : req.query
+  )
   next()
 }

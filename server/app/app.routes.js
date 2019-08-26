@@ -12,12 +12,14 @@ module.exports = function(express) {
     res.end()
   })
 
-  api.get('/get/:hash', lti.getLTIPayload)
+  // Recieve the LTI Launch, save the LTI Payload
   api.post('/launch', lti.launch)
-
   if (developerOptions.get('enableCannedLTIResponse')) {
     api.get('/launch', lti.fakeLaunch)
   }
+
+  // Client retreives the LTI Payload
+  api.get('/get/:hash', lti.getLTIPayload)
 
   // Protect API routes behind JWT verification.
   if (!developerOptions.get('skipJWTVerification')) {

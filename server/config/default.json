@@ -16,9 +16,9 @@
   },
   "developerOptions": {
     "enableCORS": false,
-    "enableCannedLTI": false,
+    "enableCannedLTIResponse": false,
     "skipLTIVerification": false,
     "skipJWTVerification": false,
-    "outputLaunchRequests": false
+    "debugMode": false
   }
 }
