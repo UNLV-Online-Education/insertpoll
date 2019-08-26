@@ -5,12 +5,14 @@
       <li v-for="(answer, index) in this.answerChoices" :key="index">{{answer}}</li>
     </ul>
     <h3 v-if="myResponse.length > 0" id="ownResponse">You said: {{myResponse}}</h3>
-    <h3 id="classResponses">Class Responses (Total: {{totalResponses}})</h3>
-    <ResponseChart
-      v-if="this.showChart"
-      :answerChoices="this.answerChoices"
-      :answerBarData="this.answerBarData"
-    ></ResponseChart>
+    <div v-if="isInstructor" id="classResponses">
+      <h3>Class Responses (Total: {{totalResponses}})</h3>
+      <ResponseChart
+        v-if="this.showChart"
+        :answerChoices="this.answerChoices"
+        :answerBarData="this.answerBarData"
+      ></ResponseChart>
+    </div>
   </div>
 </template>
 
@@ -24,6 +26,7 @@ export default class PollResponseSummary extends Vue {
   @Prop() private prompt!: string;
   @Prop() private answerChoices!: string[];
   @Prop() private aggregateResponses!: any[];
+  @Prop() private isInstructor!: boolean;
   private totalResponses = 0;
   private answerBarData: number[] = [];
   private showChart = false;

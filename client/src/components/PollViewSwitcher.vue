@@ -14,6 +14,7 @@
       :answerChoices="this.answerChoices"
       :ownResponse="this.currentResponse"
       :aggregateResponses="this.aggregateResponses"
+      :isInstructor="this.isInstructor"
     ></PollResponseSummary>
   </div>
 </template>
