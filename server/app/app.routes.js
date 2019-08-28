@@ -14,7 +14,7 @@ module.exports = function(express) {
 
   // Recieve the LTI Launch, save the LTI Payload
   api.post('/launch', lti.launch)
-  if (developerOptions.get('enableCannedLTIResponse')) {
+  if (developerOptions.get('enableFakeLtiData')) {
     api.get('/launch', lti.fakeLaunch)
   }
 
@@ -22,7 +22,7 @@ module.exports = function(express) {
   api.get('/get/:hash', lti.getLTIPayload)
 
   // Protect API routes behind JWT verification.
-  if (!developerOptions.get('skipJWTVerification')) {
+  if (!developerOptions.get('skipJwtVerification')) {
     api.use(token.verify)
   }
 

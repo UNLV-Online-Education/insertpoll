@@ -15,10 +15,10 @@
     "dialect": "dialect"
   },
   "developerOptions": {
-    "enableCORS": false,
-    "enableCannedLTIResponse": false,
-    "skipLTIVerification": false,
-    "skipJWTVerification": false,
+    "enableCors": false,
+    "enableFakeLtiData": false,
+    "skipLtiVerification": false,
+    "skipJwtVerification": false,
     "debugMode": false
   }
 }

@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 // all of our routes will be prefixed with /api
 
 var router = express.Router()
-if (developerOptions.enableCORS) {
+if (developerOptions.enableCors) {
   console.log('CORS enabled.')
   router.use(cors())
 }
