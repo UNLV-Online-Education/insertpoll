@@ -16,7 +16,7 @@ module.exports = {
       console.log(new Date(), 'Headers', req.headers)
       console.log(new Date(), 'Body', req.body)
     }
-    if (developerOptions.get('skipLtiVerification')) {
+    if (developerOptions.get('enableLtiTesting')) {
       console.log(new Date(), 'Skipped LTI Verification')
       launchLTIApp(req, res)
     } else {
@@ -33,9 +33,8 @@ module.exports = {
     }
   },
 
-  fakeLaunch: function(req, res) {
-    console.log('Launching with Canned LTI Data.')
-    launchWithSampleData(req, res)
+  ltiTestPage: function(req, res) {
+    ltiTestPage(res, appConfig.basePath + 'api/launch')
   },
 
   getLTIPayload: function(req, res) {
@@ -86,18 +85,26 @@ function launchLTIApp(req, res) {
   res.end()
 }
 
-function launchWithSampleData(req, res) {
-  var sampleData = JSON.parse(
-    fs.readFileSync('./sample-LTI-data/instructor-example.json', 'UTF-8')
-  )
-  req.body = sampleData
-  if (typeof req.query.pollId !== 'undefined') {
-    if (developerOptions.get('debugMode')) {
-      console.log('Using pollId: ' + req.query.pollId)
-    }
-    req.body.pollId = req.query.pollId
-  }
-  launchLTIApp(req, res)
+// function launchWithSampleData(req, res) {
+//   var sampleData = JSON.parse(
+//     fs.readFileSync('./sample-LTI-data/instructor-example.json', 'UTF-8')
+//   )
+//   req.body = sampleData
+//   if (typeof req.query.pollId !== 'undefined') {
+//     if (developerOptions.get('debugMode')) {
+//       console.log('Using pollId: ' + req.query.pollId)
+//     }
+//     req.body.pollId = req.query.pollId
+//   }
+//   launchLTIApp(req, res)
+// }
+
+function ltiTestPage(res, launchUrl) {
+  res.render('testLti.pug', {
+    title: 'Hey',
+    message: 'Hello there!',
+    launchUrl: launchUrl
+  })
 }
 
 function parseAndSaveDataObject(ltiData) {

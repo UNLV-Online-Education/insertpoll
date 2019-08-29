@@ -16,8 +16,7 @@
   },
   "developerOptions": {
     "enableCors": false,
-    "enableFakeLtiData": false,
-    "skipLtiVerification": false,
+    "enableLtiTesting": false,
     "skipJwtVerification": false,
     "debugMode": false
   }

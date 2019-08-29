@@ -1,0 +1,45 @@
+html
+    head
+        title= 'InsertPoll Test LTI Launch'
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel='stylesheet' href='https://unpkg.com/tachyons/css/tachyons.min.css')
+    body(class="pa2")
+    h2 Test Out Insertpoll
+    p Use the form to create a Mock LTI request to the insertpoll server. When this form is available all LTI verification is bypassed. Disable this page by changing the environment setting of #[code(class="bg-washed-blue") "enableLtiTesting"] to false.
+    // register form
+    form(method='POST' action= launchUrl)
+        fieldset
+            legend Poll Information
+            div(class="fl w-100 pa2")
+                label(for='pollId' class="fl w-third") Leave blank to create a new poll
+                input#pollId(type='text' class="fl two-thirds" placeholder='Poll ID' name='pollId')
+        fieldset
+            legend User LTI Information
+            div(class="fl w-100 pa2")
+                label(for='roles' class="fl w-third") Instructor / Learner
+                select(name='roles' class="fl two-thirds")
+                    option Instructor
+                    option Learner
+            div(class="fl w-100 pa2")
+                label(for='custom_canvas_user_id' class="fl w-third") custom_canvas_user_id
+                input#custom_canvas_user_id(type='text' placeholder='' value="1999" class="fl two-thirds" name='custom_canvas_user_id')
+
+            div(class="fl w-100 pa2")
+                label(for='lis_person_name_full' class="fl w-third") lis_person_name_full
+                input#lis_person_name_full(type='text' placeholder='' value="Riley Wilks" class="fl two-thirds" name='lis_person_name_full')
+
+        fieldset
+            legend Context LTI Information
+            div(class="fl w-100 pa2")
+                label(for='custom_canvas_course_id') custom_canvas_course_id
+                input#custom_canvas_course_id(type='text' placeholder='' value="16098" name='custom_canvas_course_id')
+
+            div(class="fl w-100 pa2")
+                label(for='context_title') context_title
+                input#context_title(type='text' placeholder='' value="My Course Title" name='context_title')
+
+
+            div(class="fl w-100 pa2")
+                label(for='ext_content_return_url') ext_content_return_url
+                input#ext_content_return_url(type='text' placeholder='' value="example.com/lti/return" name='ext_content_return_url')
+        button.btn.btn-primary(type='submit') Launch

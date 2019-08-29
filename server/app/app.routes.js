@@ -14,8 +14,9 @@ module.exports = function(express) {
 
   // Recieve the LTI Launch, save the LTI Payload
   api.post('/launch', lti.launch)
-  if (developerOptions.get('enableFakeLtiData')) {
-    api.get('/launch', lti.fakeLaunch)
+
+  if (developerOptions.get('enableLtiTesting')) {
+    api.get('/testLaunch', lti.ltiTestPage)
   }
 
   // Client retreives the LTI Payload
