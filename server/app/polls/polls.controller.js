@@ -41,11 +41,18 @@ module.exports = {
       }
     })
       .then(function(poll) {
-        res.json({
-          success: true,
-          poll: poll,
-          message: 'Here is your course poll.'
-        })
+        if (poll !== null) {
+          res.json({
+            success: true,
+            poll: poll
+          })
+        } else {
+          res.json({
+            success: false,
+            poll: null,
+            message: 'Could not find poll id: ' + req.params.poll_id
+          })
+        }
       })
       .catch(function(err) {
         console.log(err)
