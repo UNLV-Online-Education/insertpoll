@@ -3,15 +3,17 @@ html
         title= 'InsertPoll Test LTI Launch'
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel='stylesheet' href='https://unpkg.com/tachyons/css/tachyons.min.css')
-    body(class="pa2")
-    h2 Test Out Insertpoll
-    p Use the form to create a Mock LTI request to the insertpoll server. When this form is available all LTI verification is bypassed. Disable this page by changing the environment setting of #[code(class="bg-washed-blue") "enableLtiTesting"] to false.
+    body(class="pa2 sans-serif")
+    h1 InsertPoll Test LTI Launch
+    p This page lets you test how insertpoll responds to various LTI launch parameters. Defaults have been provided. You can experiment with launching as an instructor or a learner.
+    h2 Disable in production
+    p This page should be disabled in production. Change #[code(class="bg-washed-blue") "enableLtiTesting"] to false in your #[code(class="bg-washed-blue") local-production.json] file.
     // register form
     form(method='POST' action= launchUrl)
         fieldset
             legend Poll Information
             div(class="fl w-100 pa2")
-                label(for='pollId' class="fl w-third") Leave blank to create a new poll
+                label(for='pollId' class="fl w-third") Poll Id, or leave blank to create new poll
                 input#pollId(type='text' class="fl two-thirds" placeholder='Poll ID' name='pollId')
         fieldset
             legend User LTI Information
@@ -31,15 +33,16 @@ html
         fieldset
             legend Context LTI Information
             div(class="fl w-100 pa2")
-                label(for='custom_canvas_course_id') custom_canvas_course_id
-                input#custom_canvas_course_id(type='text' placeholder='' value="16098" name='custom_canvas_course_id')
+                label(for='custom_canvas_course_id' class="fl w-third") custom_canvas_course_id
+                input#custom_canvas_course_id(type='text' class="fl two-thirds" placeholder='' value="16098" name='custom_canvas_course_id')
 
             div(class="fl w-100 pa2")
-                label(for='context_title') context_title
-                input#context_title(type='text' placeholder='' value="My Course Title" name='context_title')
+                label(for='context_title' class="fl w-third") context_title
+                input#context_title(type='text' class="fl two-thirds" placeholder='' value="My Course Title" name='context_title')
 
 
             div(class="fl w-100 pa2")
-                label(for='ext_content_return_url') ext_content_return_url
-                input#ext_content_return_url(type='text' placeholder='' value="example.com/lti/return" name='ext_content_return_url')
-        button.btn.btn-primary(type='submit') Launch
+                label(for='ext_content_return_url' class="fl w-third light-gray") ext_content_return_url
+                input#ext_content_return_url(type='text' class="fl two-thirds" placeholder='' disabled='true' value="" name='ext_content_return_url')
+        div(class='pa2')
+            button.btn.btn-primary(type='submit' class='pa2') Launch

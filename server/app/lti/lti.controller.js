@@ -90,8 +90,6 @@ function launchLTIApp(req, res) {
 
 function ltiTestPage(res, launchUrl) {
   res.render('testLti.pug', {
-    title: 'Hey',
-    message: 'Hello there!',
     launchUrl: launchUrl
   })
 }
