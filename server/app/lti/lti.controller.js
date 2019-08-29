@@ -65,15 +65,18 @@ function launchLTIApp(req, res) {
   var hashForRecord = parseAndSaveDataObject(req.body)
   // blackboard adds 'custom_' to any custom (non-LTI) parameters'
   var redirectUrl
-  if (typeof req.body.pollId !== 'undefined') {
+  if (
+    typeof req.body.pollId == 'undefined' ||
+    req.body.pollId.trim().length == 0
+  ) {
+    redirectUrl = appConfig.basePath + 'insert?hash=' + hashForRecord
+  } else {
     redirectUrl =
       appConfig.basePath +
       'embed?hash=' +
       hashForRecord +
       '&pollId=' +
       req.body.pollId
-  } else {
-    redirectUrl = appConfig.basePath + 'insert?hash=' + hashForRecord
   }
   if (developerOptions.get('debugMode')) {
     console.log('Redirecting: ' + redirectUrl)
