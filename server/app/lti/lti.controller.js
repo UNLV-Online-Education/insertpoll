@@ -88,20 +88,6 @@ function launchLTIApp(req, res) {
   res.end()
 }
 
-// function launchWithSampleData(req, res) {
-//   var sampleData = JSON.parse(
-//     fs.readFileSync('./sample-LTI-data/instructor-example.json', 'UTF-8')
-//   )
-//   req.body = sampleData
-//   if (typeof req.query.pollId !== 'undefined') {
-//     if (developerOptions.get('debugMode')) {
-//       console.log('Using pollId: ' + req.query.pollId)
-//     }
-//     req.body.pollId = req.query.pollId
-//   }
-//   launchLTIApp(req, res)
-// }
-
 function ltiTestPage(res, launchUrl) {
   res.render('testLti.pug', {
     title: 'Hey',
