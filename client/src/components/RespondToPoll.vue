@@ -11,7 +11,7 @@
             </label>
           </li>
         </ul>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" class="btn btn-primary btn-lg">
       </form>
     </div>
   </div>
