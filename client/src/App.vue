@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <router-view/>
+  <div id="app" class="container-fluid">
+    <router-view class="row" />
   </div>
 </template>
 
@@ -10,6 +10,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
-  color: #BF1E2E;
+  color: gray;
 }
 </style>

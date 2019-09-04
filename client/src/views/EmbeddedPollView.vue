@@ -63,6 +63,10 @@ export default class EmbeddedPollView extends Vue {
         }
         this.gotData = true;
       });
+
+    // this.prompt = "How awesome does this look?";
+    // this.answerChoices = ["great", "medium", "not so good yet"];
+    // this.gotData = true;
   }
 }
 </script>
