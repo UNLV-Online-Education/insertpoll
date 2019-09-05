@@ -8,10 +8,9 @@
                     <ul>
                         <li v-for="(answer, index) in this.answerChoices" :key="answer">
                             <!--<label>
-                                <input type="radio" >
-                                
+                                <input type="radio" v-model="chosenValue">
                             </label>-->
-                            <button class="btn btn-light" v-model="chosenValue" name="answer_choice" :value="index">
+                            <button class="btn btn-light"  name="answer_choice" :value="index">
                               {{answer}}
                             </button>
                         </li>
