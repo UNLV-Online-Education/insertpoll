@@ -7,6 +7,7 @@
       :prompt="this.prompt"
       :isInstructor="isInstructor"
       :answerChoices="this.answerChoices"
+      class="w-100"
     ></PollViewSwitcher>
   </div>
 </template>

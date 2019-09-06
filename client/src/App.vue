@@ -12,4 +12,8 @@
   text-align: left;
   color: gray;
 }
+
+body{
+	background: #f7f7f7 !important;
+}
 </style>

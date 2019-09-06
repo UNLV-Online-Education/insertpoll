@@ -1,23 +1,17 @@
-<template class="w-100">
+<template>
     <div>
-        <div class="card cardbgGray p-4">
-            <div class="card-body">
-                <h2 id="prompt">{{ prompt }}</h2>
+        <div class="cardbgGray p-4">
+            <div>
+                <h2 id="prompt" class="mb-4">{{ prompt }}</h2>
                 <div id="answerChoices">
-                <button class="btn btn-light btn-lg d-block btn-block selection mb-4 buttonText" v-cloak v-for="(answer, index) in this.answerChoices" :key="answer" name="answer_choice" :value="index" @click="clicked(index)" :class="[active==index ? 'selectedButton moveToRight' : 'notSelected']"><i class="fa fa-check-circle fa-2x circleCheck"  v-cloak v-if="active==index" :class="[active==index ? 'animated zoomIn' : '']"></i> <i class="fa fa-circle-thin fa-2x circleOnly" v-cloak v-else></i> {{answer}}</button>
-                <!--
-                    <form @submit.prevent="submitAnswer">
-                        <ul>
-                            <li v-for="(answer, index) in this.answerChoices" :key="answer">
-                                <label>
-                                    <input type="radio" v-model="chosenValue" name="answer_choice" :value="index" v-on:click="selection">
-                                    {{answer}} <i class="fa fa-check" v-if="selected"></i>
-                                </label>
-                            </li>
-                        </ul>
-                        <input type="submit" value="Submit" role="button" class="btn btn-success btn-lg">
-                    </form>-->
-                    <button type="submit" class="btn btn-success btn-lg mt-30" @click="submitAnswer">Submit your vote <i class="fa fa-check"></i></button>
+                <!-- Selection buttons -->
+                <div>
+                <button class="btn btn-light btn-lg d-block btn-block selection mb-4 buttonText w-100" v-cloak v-for="(answer, index) in this.answerChoices" :key="answer" name="answer_choice" :value="index" @click="clicked(index)" :class="[active==index ? 'selectedButton moveToRight' : 'notSelected']"><i class="fa fa-check-circle fa-2x circleCheck"  v-cloak v-if="active==index" :class="[active==index ? 'animated zoomIn' : '']"></i> <i class="fa fa-circle-thin fa-2x circleOnly" v-cloak v-else></i> {{answer}}</button>
+                </div>
+                <!-- submit choices -->
+                <div>
+                    <button type="submit" class="btn btn-success btn-lg p-3 submitVote" @click="submitAnswer">Submit your vote <i class="fa fa-check"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -61,13 +55,17 @@ ul {
     }
 }
 
+.submitVote{
+  font-weight: bold;
+}
+
 .buttonText{
   text-align: left !important;
-  word-break: normal;
+  word-wrap: break-word;
 }
 
 .cardbgGray{
-  background: #f7f7f7 !important;
+  
 }
 
 .circleOnly, .circleCheck{
@@ -82,7 +80,7 @@ ul {
 }
 
 .moveToRight{
-  transform: translateX(15px);
+  transform: translateX(15px) translateY(0px);
   transition: transform .2s linear;
 }
 
@@ -91,6 +89,10 @@ ul {
   box-shadow: 4px 5px 5px #d8d8d8;
   transform: translateX(15px);
   transition: all .2s linear;
+}
+
+.selection{
+  min-width: 35% !important;
 }
 
 .selectedButton, selection:focus{
@@ -107,9 +109,9 @@ ul {
 }
 
 .notSelected{
-   border: 2px solid #ECECEC;
    transition: transform .3s linear;
    box-shadow: 4px 5px 5px #d8d8d8;
+   border: 2px solid #d8d8d8 !important;
    background: white;
 }
 </style>
