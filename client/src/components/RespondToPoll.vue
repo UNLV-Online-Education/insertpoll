@@ -31,10 +31,15 @@ export default class RespondToPoll extends Vue {
     @Prop() private answerChoices!: any[];
     private chosenValue: string = '';
     private active: number = -1;
-    private pollColor: string = '#28a745';
+    private pollColor: string = '#28a745'; // could be used later
 
     public clicked(index: number) {
       this.active = index;
+      this.chosenValue = this.selection(this.active).toString();
+    }
+
+    public selection(index: number) {
+        return index;
     }
 
     private submitAnswer() {
