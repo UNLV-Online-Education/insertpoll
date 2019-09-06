@@ -4,7 +4,7 @@
             <div class="card-body">
                 <h2 id="prompt">{{ prompt }}</h2>
                 <div id="answerChoices">
-                <button class="btn btn-light btn-lg d-block btn-block selection mb-10 buttonText" v-cloak v-for="(answer, index) in this.answerChoices" :key="answer" name="answer_choice" :value="index" @click="clicked(index)" :class="[active==index ? 'selectedButton moveToRight' : 'notSelected']"><i class="fa fa-check-circle fa-2x circleCheck" v-if="active==index" :class="[active==index ? 'animated zoomIn' : '']"></i> <i class="fa fa-circle-thin fa-2x circleOnly" v-else></i> {{answer}}</button>
+                <button class="btn btn-light btn-lg d-block btn-block selection mb-4 buttonText" v-cloak v-for="(answer, index) in this.answerChoices" :key="answer" name="answer_choice" :value="index" @click="clicked(index)" :class="[active==index ? 'selectedButton moveToRight' : 'notSelected']"><i class="fa fa-check-circle fa-2x circleCheck"  v-cloak v-if="active==index" :class="[active==index ? 'animated zoomIn' : '']"></i> <i class="fa fa-circle-thin fa-2x circleOnly" v-cloak v-else></i> {{answer}}</button>
                 <!--
                     <form @submit.prevent="submitAnswer">
                         <ul>
@@ -17,7 +17,7 @@
                         </ul>
                         <input type="submit" value="Submit" role="button" class="btn btn-success btn-lg">
                     </form>-->
-                    <button type="submit" class="btn btn-success btn-lg mt-30" @click="submitAnswer">Submit <i class="fa fa-check"></i></button>
+                    <button type="submit" class="btn btn-success btn-lg mt-30" @click="submitAnswer">Submit your vote <i class="fa fa-check"></i></button>
                 </div>
             </div>
         </div>
@@ -70,6 +70,10 @@ ul {
   background: #f7f7f7 !important;
 }
 
+.circleOnly, .circleCheck{
+  vertical-align: middle;
+  font-size: 150%;
+}
 .circleOnly{
   color: #E4E4E4;
 }
@@ -91,6 +95,7 @@ ul {
 
 .selectedButton, selection:focus{
    border: 2px solid #28a745 !important;
+   transition: all 3s linear;
    box-shadow: 5px 9px 18px #d8d8d8;
    background: white;
    font-weight:bold;
@@ -105,6 +110,6 @@ ul {
    border: 2px solid #ECECEC;
    transition: transform .3s linear;
    box-shadow: 4px 5px 5px #d8d8d8;
-   background: red;
+   background: white;
 }
 </style>

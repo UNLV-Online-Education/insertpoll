@@ -33,6 +33,7 @@
     "@vue/cli-service": "^3.1.4",
     "@vue/test-utils": "^1.0.0-beta.28",
     "animate.css": "^3.7.2",
+    "copy-webpack-plugin": "^5.0.4",
     "flush-promises": "^1.0.2",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
