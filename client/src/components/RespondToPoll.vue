@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <div class="p-4">
         <div class="cardbgGray p-4">
             <div>
                 <h2 id="prompt" class="mb-4">{{ prompt }}</h2>
                 <div id="answerChoices">
                 <!-- Selection buttons -->
                 <div>
-                <button class="btn btn-light btn-lg d-block btn-block selection mb-4 buttonText w-100" v-cloak v-for="(answer, index) in this.answerChoices" :key="answer" name="answer_choice" :value="index" @click="clicked(index)" :class="[active==index ? 'selectedButton moveToRight' : 'notSelected']"><i class="fa fa-check-circle fa-2x circleCheck"  v-cloak v-if="active==index" :class="[active==index ? 'animated zoomIn' : '']"></i> <i class="fa fa-circle-thin fa-2x circleOnly" v-cloak v-else></i> {{answer}}</button>
+                <button class="btn btn-light btn-lg d-block btn-block selection mb-4 buttonText w-85 p-4" v-cloak v-for="(answer, index) in this.answerChoices" :key="answer" name="answer_choice" :value="index" @click="clicked(index)" :class="[active==index ? 'selectedButton moveToRight' : 'notSelected']"><i class="fa fa-check-circle fa-2x circleCheck"  v-cloak v-if="active==index" :class="[active==index ? 'animated zoomIn' : '']"></i> <i class="fa fa-circle-thin fa-2x circleOnly" v-cloak v-else></i> {{answer}}</button>
                 </div>
                 <!-- submit choices -->
                 <div>
@@ -31,6 +31,7 @@ export default class RespondToPoll extends Vue {
     @Prop() private answerChoices!: any[];
     private chosenValue: string = '';
     private active: number = -1;
+    private pollColor: string = '#28a745';
 
     public clicked(index: number) {
       this.active = index;
