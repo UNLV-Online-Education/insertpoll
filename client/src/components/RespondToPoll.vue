@@ -4,7 +4,7 @@
             <div class="card-body">
                 <h2 id="prompt">{{ prompt }}</h2>
                 <div id="answerChoices">
-                <button class="btn btn-light btn-lg d-block btn-block selection" v-for="(answer, index) in this.answerChoices" :key="answer" name="answer_choice" :value="index" @click="clicked(index)" :class="[active==index ? 'selectedButton' : 'notSelected']"><i class="fa fa-check-circle fa-2x circleCheck" v-if="active==index"></i> <i class="fa fa-circle fa-2x circleOnly" v-else></i> {{answer}}</button>
+                <button class="btn btn-light btn-lg d-block btn-block selection m-3" v-for="(answer, index) in this.answerChoices" :key="answer" name="answer_choice" :value="index" @click="clicked(index)" :class="[active==index ? 'selectedButton' : 'notSelected']"><i class="fa fa-check-circle fa-2x circleCheck" v-if="active==index"></i> <i class="fa fa-circle-thin fa-2x circleOnly" v-else></i> {{answer}}</button>
                 <!--
                     <form @submit.prevent="submitAnswer">
                         <ul>
@@ -38,7 +38,7 @@ export default class RespondToPoll extends Vue {
     private chosenValue: string = '';
     private active: number = -1;
 
-    public clicked(index:number){
+    public clicked(index: number) {
       this.active = index;
     }
 
