@@ -1,6 +1,6 @@
-<template>
-    <div class="w-100">
-        <div class="card cardbgGray">
+<template class="w-100">
+    <div>
+        <div class="card cardbgGray p-4">
             <div class="card-body">
                 <h2 id="prompt">{{ prompt }}</h2>
                 <div id="answerChoices">
@@ -86,24 +86,25 @@ ul {
   background: white !important;
   box-shadow: 4px 5px 5px #d8d8d8;
   transform: translateX(15px);
-  transition: transform .2s linear;
+  transition: all .2s linear;
 }
 
 .selectedButton, selection:focus{
-   border: 3px solid #28a745 !important;
+   border: 2px solid #28a745 !important;
    box-shadow: 5px 9px 18px #d8d8d8;
    background: white;
+   font-weight:bold;
 }
 
 .notSelected:hover{
-  transform: scale(1.02);
+  transform: scale(1.001);
   transition: transform .2s linear;
 }
 
 .notSelected{
-   border: 3px solid #ECECEC;
+   border: 2px solid #ECECEC;
    transition: transform .3s linear;
    box-shadow: 4px 5px 5px #d8d8d8;
-   background: white;
+   background: red;
 }
 </style>
