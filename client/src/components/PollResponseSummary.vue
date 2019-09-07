@@ -1,10 +1,18 @@
 <template>
   <div>
     <h2 id="prompt">{{prompt}}</h2>
-    <ul id="answerChoices">
-      <li v-for="(answer, index) in this.answerChoices" :key="index">{{answer}}</li>
+    <ul id="answerChoices" class="list-group">
+      <li v-for="(answer, index) in this.answerChoices" :key="index" class="list-group-item p-4" :class="[choiceValue==index ? 'font-weight-bold bg-success' : 'font-weight-normal']">
+      <span>
+        <i class="fa fa-check-circle circleCheck text-white" v-cloak v-if="choiceValue==index"><h4 class="font-weight-bold">You chose: </h4> </i> {{answer}}
+        </span>
+      <!--<div class="progress">
+  <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+</div>-->
+<!--<p class="font-weight-bold">13 votes</p>-->
+      </li>
     </ul>
-    <h3 v-if="myResponse.length > 0" id="ownResponse">You said: {{myResponse}}</h3>
+    <!--<h3 v-if="myResponse.length > 0" id="ownResponse">You said: {{myResponse}}</h3>
     <div v-if="isInstructor" id="classResponses">
       <h3>Class Responses (Total: {{totalResponses}})</h3>
       <ResponseChart
@@ -12,7 +20,7 @@
         :answerChoices="this.answerChoices"
         :answerBarData="this.answerBarData"
       ></ResponseChart>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -30,9 +38,15 @@ export default class PollResponseSummary extends Vue {
   private totalResponses = 0;
   private answerBarData: number[] = [];
   private showChart = false;
+  private choiceValue: number = -1;
+
+  // PollResponseSummary() {
+  //   this.myResponse();
+  // }
 
   get myResponse() {
     if (this.ownResponse !== null) {
+      this.choiceValue = this.ownResponse.value;
       return this.answerChoices[+this.ownResponse.value];
     } else {
       return '';
