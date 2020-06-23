@@ -5,7 +5,7 @@
       <li v-for="(answer, index) in this.answerChoices" :key="index">{{answer}}</li>
     </ul>
     <h3 v-if="myResponse.length > 0" id="ownResponse">You said: {{myResponse}}</h3>
-    <div v-if="isInstructor" id="classResponses">
+    <div id="classResponses">
       <h3>Class Responses (Total: {{totalResponses}})</h3>
       <ResponseChart
         v-if="this.showChart"
